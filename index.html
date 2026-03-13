@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Gym AI | Next-Gen Performance</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <div class="logo-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                <h1 class="logo-text">Smart<span>Gym</span> AI</h1>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-section-title" data-i18n="overview">Overview</div>
+                <a href="#" class="nav-item active" data-target="dashboardSection"><i
+                        class="fa-solid fa-gauge-high"></i> <span data-i18n="dashboard">Dashboard</span></a>
+                <a href="#" class="nav-item"><i class="fa-solid fa-users"></i> <span
+                        data-i18n="athletes">Athletes</span></a>
+                <a href="#" class="nav-item"><i class="fa-solid fa-clipboard-user"></i> <span
+                        data-i18n="coaches">Coaches</span></a>
+
+                <div class="nav-section-title" data-i18n="aiEngine">AI Engine</div>
+                <a href="#" class="nav-item" data-target="predictionsSection"><i class="fa-solid fa-brain"></i> <span
+                        data-i18n="predictions">Predictions</span></a>
+                <a href="#" class="nav-item" data-target="motionSection"><i class="fa-solid fa-person-running"></i>
+                    <span data-i18n="motion">Motion Analysis</span></a>
+                <a href="#" class="nav-item" data-target="biometricsSection"><i class="fa-solid fa-heart-pulse"></i>
+                    <span data-i18n="biometrics">Biometrics</span></a>
+
+                <div class="nav-section-title" data-i18n="management">Management</div>
+                <a href="#" class="nav-item"><i class="fa-solid fa-calendar-check"></i> <span
+                        data-i18n="classes">Classes</span></a>
+                <a href="#" class="nav-item"><i class="fa-solid fa-credit-card"></i> <span
+                        data-i18n="memberships">Memberships</span></a>
+                <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i> <span
+                        data-i18n="settings">Settings</span></a>
+            </nav>
+
+            <div class="sensor-status">
+                <div class="status-indicator live"></div>
+                <span class="status-text" data-i18n="sensorsLive">Sensors: <strong class="text-success">Live
+                        (12)</strong></span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search athletes, metrics, or AI models...">
+                </div>
+
+                <div class="header-actions">
+                    <!-- Language Switcher Button -->
+                    <div class="action-btn lang-switch" id="langSwitchBtn" title="تغيير اللغة / Change Language">
+                        <i class="fa-solid fa-globe"></i>
+                        <span class="lang-text">عربي</span>
+                    </div>
+
+                    <div class="action-btn notifications">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=6a0dad&color=fff"
+                            alt="Admin Profile" class="avatar">
+                        <div class="user-info">
+                            <span class="user-name" data-i18n="adminName">Faisal (Admin)</span>
+                            <span class="system-role" data-i18n="adminRole">System Manager</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-wrapper content-section active" id="dashboardSection">
+                <div class="page-title">
+                    <h2 data-i18n="pageTitle">Live Session Overview</h2>
+                    <p data-i18n="pageDesc">Real-time AI analysis of the current training session.</p>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-header">
+                            <h3 data-i18n="fatigue">Fatigue Level</h3>
+                            <div class="icon-box warning"><i class="fa-solid fa-battery-quarter"></i></div>
+                        </div>
+                        <div class="kpi-value warning-text">68%</div>
+                        <div class="kpi-insight" data-i18n="fatigueInsight">
+                            <i class="fa-solid fa-arrow-trend-up"></i> +12% from last session
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress bg-warning" style="width: 68%"></div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-header">
+                            <h3 data-i18n="injury">Injury Risk</h3>
+                            <div class="icon-box danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        </div>
+                        <div class="kpi-value danger-text">14%</div>
+                        <div class="kpi-insight" data-i18n="injuryInsight">
+                            <i class="fa-solid fa-shield-halved"></i> Predictive Engine Active
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress bg-danger" style="width: 14%"></div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-header">
+                            <h3 data-i18n="calories">Active Calories</h3>
+                            <div class="icon-box primary"><i class="fa-solid fa-fire"></i></div>
+                        </div>
+                        <div class="kpi-value primary-text">420 <span class="unit">kcal</span></div>
+                        <div class="kpi-insight" data-i18n="caloriesInsight">
+                            <i class="fa-solid fa-arrow-trend-up"></i> On track for target
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress bg-primary" style="width: 55%"></div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-header">
+                            <h3 data-i18n="energy">Energy Prediction</h3>
+                            <div class="icon-box success"><i class="fa-solid fa-bolt"></i></div>
+                        </div>
+                        <div class="kpi-value success-text" data-i18n="energyVal">High</div>
+                        <div class="kpi-insight" data-i18n="energyInsight">
+                            <i class="fa-solid fa-bed"></i> Based on 8h 12m sleep
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress bg-success" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Grid Content -->
+                <div class="bento-grid">
+                    <!-- Chart: Biometrics -->
+                    <div class="bento-item chart-panel glass-panel col-span-2">
+                        <div class="panel-header">
+                            <h3 data-i18n="chartTitle">Real-time Biometrics (Sensor Data)</h3>
+                            <button class="btn-outline" data-i18n="viewLogBtn">View Log</button>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="hrChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- AI Notifications -->
+                    <div class="bento-item ai-alerts glass-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-robot"></i> <span data-i18n="alertsTitle">AI Smart Alerts</span>
+                            </h3>
+                        </div>
+                        <div class="alerts-list">
+                            <div class="alert-item risk-high">
+                                <div class="alert-icon"><i class="fa-solid fa-heart-crack"></i></div>
+                                <div class="alert-content">
+                                    <h4 data-i18n="alert1Title">High HR Variance Detected</h4>
+                                    <p data-i18n="alert1Desc">Athlete #43 (Omar) shows signs of overexertion.
+                                        Recommendation: 5 min rest.</p>
+                                    <span class="time" data-i18n="alert1Time">Just now</span>
+                                </div>
+                            </div>
+                            <div class="alert-item risk-medium">
+                                <div class="alert-icon"><i class="fa-solid fa-shoe-prints"></i></div>
+                                <div class="alert-content">
+                                    <h4 data-i18n="alert2Title">Posture Asymmetry</h4>
+                                    <p data-i18n="alert2Desc">Motion analysis detects left knee strain during squats.
+                                    </p>
+                                    <span class="time" data-i18n="alert2Time">12 mins ago</span>
+                                </div>
+                            </div>
+                            <div class="alert-item risk-success">
+                                <div class="alert-icon"><i class="fa-solid fa-bullseye"></i></div>
+                                <div class="alert-content">
+                                    <h4 data-i18n="alert3Title">Goal Reached</h4>
+                                    <p data-i18n="alert3Desc">Daily step count target achieved (10,000 steps).</p>
+                                    <span class="time" data-i18n="alert3Time">45 mins ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personalized Plan -->
+                    <div class="bento-item ai-recommendations glass-panel col-span-2">
+                        <div class="panel-header">
+                            <h3 data-i18n="planTitle">AI Generated Plan (Next Session)</h3>
+                            <span class="badge ai-badge" data-i18n="planBadge">Accuracy: 94.2%</span>
+                        </div>
+                        <div class="plan-grid">
+                            <div class="plan-card">
+                                <div class="plan-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                                <h4 data-i18n="plan1Title">Training</h4>
+                                <p data-i18n="plan1Desc">Lower Intensity Cardio (45 mins). Avoid heavy leg press due to
+                                    detected fatigue.</p>
+                            </div>
+                            <div class="plan-card">
+                                <div class="plan-icon"><i class="fa-solid fa-apple-whole"></i></div>
+                                <h4 data-i18n="plan2Title">Nutrition</h4>
+                                <p data-i18n="plan2Desc">High protein recovery shake within 30 mins. +500ml hydration
+                                    required.</p>
+                            </div>
+                            <div class="plan-card">
+                                <div class="plan-icon"><i class="fa-solid fa-bed-pulse"></i></div>
+                                <h4 data-i18n="plan3Title">Recovery</h4>
+                                <p data-i18n="plan3Desc">Recommend 8.5 hours of sleep. Focus on deep sleep phase.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model Status -->
+                    <div class="bento-item model-status glass-panel">
+                        <div class="panel-header">
+                            <h3 data-i18n="modelTitle">ML Model Status</h3>
+                        </div>
+                        <div class="model-info">
+                            <div class="info-row">
+                                <span data-i18n="modelTypeLabel">Model Type</span>
+                                <strong data-i18n="modelTypeVal">Random Forest / LSTM</strong>
+                            </div>
+                            <div class="info-row">
+                                <span data-i18n="modelTrainedLabel">Last Trained</span>
+                                <strong data-i18n="modelTrainedVal">Today, 04:00 AM</strong>
+                            </div>
+                            <div class="info-row">
+                                <span data-i18n="modelDelayLabel">Prediction Delay</span>
+                                <strong data-i18n="modelDelayVal">12 ms (Real-time)</strong>
+                            </div>
+                        </div>
+                        <div class="accuracy-chart-container">
+                            <div class="circular-progress">
+                                <div class="inner-circle">94%</div>
+                            </div>
+                            <p class="text-center mt-2" data-i18n="modelAccuracy">Overall Accuracy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predictions Section -->
+            <div class="dashboard-wrapper content-section" id="predictionsSection">
+                <div class="page-title">
+                    <h2 data-i18n="predictionsPageTitle">AI Predictive Engine</h2>
+                    <p data-i18n="predictionsPageDesc">Analyze historical data to forecast injury mapping and athlete
+                        lifecycle.</p>
+                </div>
+                <div class="bento-grid">
+                    <div class="bento-item glass-panel col-span-2">
+                        <div class="panel-header">
+                            <h3 data-i18n="riskAnalysis">Injury Risk Analysis</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="riskChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bento-item glass-panel ai-recommendations">
+                        <div class="panel-header">
+                            <h3 data-i18n="aiDiagnosis">Smart Diagnosis</h3>
+                        </div>
+                        <div class="alerts-list">
+                            <div class="alert-item risk-high">
+                                <div class="alert-icon"><i class="fa-solid fa-bone"></i></div>
+                                <div class="alert-content">
+                                    <h4 data-i18n="pred1Title">Hamstring Vulnerability</h4>
+                                    <p data-i18n="pred1Desc">72% probability of strain in next 7 days for Athlete #12.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="alert-item risk-medium">
+                                <div class="alert-icon"><i class="fa-solid fa-droplet"></i></div>
+                                <div class="alert-content">
+                                    <h4 data-i18n="pred2Title">Dehydration Risk</h4>
+                                    <p data-i18n="pred2Desc">Based on current sweat rate and temp.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motion Analysis Section -->
+            <div class="dashboard-wrapper content-section" id="motionSection">
+                <div class="page-title">
+                    <h2 data-i18n="motionPageTitle">Computer Vision & Motion</h2>
+                    <p data-i18n="motionPageDesc">Live skeletal tracking and form correction alerts.</p>
+                </div>
+                <div class="bento-grid">
+                    <div class="bento-item glass-panel col-span-2"
+                        style="display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; min-height:400px;">
+                        <!-- Mock Video/Camera feed -->
+                        <div class="camera-feed-bg">
+                            <i class="fa-solid fa-video camera-icon-bg"></i>
+                            <div class="skeleton-overlay"></div>
+                            <div class="scan-line"></div>
+                        </div>
+
+                        <div
+                            style="position:absolute; bottom:20px; left:20px; background:rgba(0,0,0,0.7); padding:10px 20px; border-radius:10px; border-left:3px solid var(--primary);">
+                            <span style="color:var(--primary-light); font-size:12px; font-weight:bold"
+                                data-i18n="cameraLive">Camera 04 - LIVE (Squat Rack)</span>
+                        </div>
+                        <div style="position:absolute; top:20px; right:20px;">
+                            <span class="badge ai-badge" style="position:relative; font-size:14px;"><i
+                                    class="fa-solid fa-crosshairs"></i> <span data-i18n="trackingActive">Tracking
+                                    Active</span></span>
+                        </div>
+                    </div>
+                    <div class="bento-item glass-panel">
+                        <div class="panel-header">
+                            <h3 data-i18n="formFeedback">Form Feedback</h3>
+                        </div>
+                        <div class="alerts-list">
+                            <div class="alert-item risk-medium">
+                                <div class="alert-icon"><i class="fa-solid fa-ruler-combined"></i></div>
+                                <div class="alert-content">
+                                    <h4 data-i18n="motion1Title">Depth Insufficient</h4>
+                                    <p data-i18n="motion1Desc">Squat depth is 15° above parallel. Correct immediately.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="alert-item risk-high">
+                                <div class="alert-icon"><i class="fa-solid fa-arrows-left-right"></i></div>
+                                <div class="alert-content">
+                                    <h4 data-i18n="motion2Title">Knee Cave (Valgus)</h4>
+                                    <p data-i18n="motion2Desc">Significant inward knee movement on upward phase.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biometrics Section -->
+            <div class="dashboard-wrapper content-section" id="biometricsSection">
+                <div class="page-title">
+                    <h2 data-i18n="bioPageTitle">Deep Biometrics</h2>
+                    <p data-i18n="bioPageDesc">Comprehensive vital signs from all connected wearable sensors.</p>
+                </div>
+                <div class="bento-grid">
+                    <div class="bento-item glass-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-user"></i> Omar H. (Athlete #43)</h3>
+                        </div>
+                        <p style="font-size:32px; font-weight:bold; color:var(--danger)">178 <span
+                                style="font-size:14px; color:var(--text-secondary)">BPM</span></p>
+                        <canvas id="miniChart1" style="height:100px; width:100%"></canvas>
+                    </div>
+                    <div class="bento-item glass-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-user"></i> Ali K. (Athlete #12)</h3>
+                        </div>
+                        <p style="font-size:32px; font-weight:bold; color:var(--success)">112 <span
+                                style="font-size:14px; color:var(--text-secondary)">BPM</span></p>
+                        <canvas id="miniChart2" style="height:100px; width:100%"></canvas>
+                    </div>
+                    <div class="bento-item glass-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-user"></i> Sam D. (Athlete #05)</h3>
+                        </div>
+                        <p style="font-size:32px; font-weight:bold; color:var(--primary)">145 <span
+                                style="font-size:14px; color:var(--text-secondary)">BPM</span></p>
+                        <canvas id="miniChart3" style="height:100px; width:100%"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
