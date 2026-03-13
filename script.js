@@ -268,6 +268,28 @@ document.addEventListener("DOMContentLoaded", () => {
         hrChart.update('none'); // 'none' for smooth animation without redrawing everything
     }, 2000);
 
+    // --- Sidebar Toggle Logic ---
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    // Default open on larger screens
+    if (window.innerWidth >= 769) {
+        sidebar.classList.add('active');
+    }
+
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        }
+    });
+
     // --- Language Switcher Logic ---
     let currentLang = 'en';
     const langSwitchBtn = document.getElementById('langSwitchBtn');

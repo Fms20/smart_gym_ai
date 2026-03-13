@@ -27,29 +27,41 @@
             </div>
 
             <nav class="nav-menu">
-                <div class="nav-section-title" data-i18n="overview">Overview</div>
-                <a href="#" class="nav-item active" data-target="dashboardSection"><i
-                        class="fa-solid fa-gauge-high"></i> <span data-i18n="dashboard">Dashboard</span></a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-users"></i> <span
-                        data-i18n="athletes">Athletes</span></a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-clipboard-user"></i> <span
-                        data-i18n="coaches">Coaches</span></a>
+                <div class="nav-section-group open">
+                    <div class="nav-section-title" onclick="this.parentElement.classList.toggle('open')">
+                        <span data-i18n="overview">Overview</span>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="nav-section-items">
+                        <a href="#" class="nav-item active" data-target="dashboardSection"><i class="fa-solid fa-gauge-high"></i> <span data-i18n="dashboard">Dashboard</span></a>
+                        <a href="#" class="nav-item"><i class="fa-solid fa-users"></i> <span data-i18n="athletes">Athletes</span></a>
+                        <a href="#" class="nav-item"><i class="fa-solid fa-clipboard-user"></i> <span data-i18n="coaches">Coaches</span></a>
+                    </div>
+                </div>
 
-                <div class="nav-section-title" data-i18n="aiEngine">AI Engine</div>
-                <a href="#" class="nav-item" data-target="predictionsSection"><i class="fa-solid fa-brain"></i> <span
-                        data-i18n="predictions">Predictions</span></a>
-                <a href="#" class="nav-item" data-target="motionSection"><i class="fa-solid fa-person-running"></i>
-                    <span data-i18n="motion">Motion Analysis</span></a>
-                <a href="#" class="nav-item" data-target="biometricsSection"><i class="fa-solid fa-heart-pulse"></i>
-                    <span data-i18n="biometrics">Biometrics</span></a>
+                <div class="nav-section-group">
+                    <div class="nav-section-title" onclick="this.parentElement.classList.toggle('open')">
+                        <span data-i18n="aiEngine">AI Engine</span>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="nav-section-items">
+                        <a href="#" class="nav-item" data-target="predictionsSection"><i class="fa-solid fa-brain"></i> <span data-i18n="predictions">Predictions</span></a>
+                        <a href="#" class="nav-item" data-target="motionSection"><i class="fa-solid fa-person-running"></i> <span data-i18n="motion">Motion Analysis</span></a>
+                        <a href="#" class="nav-item" data-target="biometricsSection"><i class="fa-solid fa-heart-pulse"></i> <span data-i18n="biometrics">Biometrics</span></a>
+                    </div>
+                </div>
 
-                <div class="nav-section-title" data-i18n="management">Management</div>
-                <a href="#" class="nav-item"><i class="fa-solid fa-calendar-check"></i> <span
-                        data-i18n="classes">Classes</span></a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-credit-card"></i> <span
-                        data-i18n="memberships">Memberships</span></a>
-                <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i> <span
-                        data-i18n="settings">Settings</span></a>
+                <div class="nav-section-group">
+                    <div class="nav-section-title" onclick="this.parentElement.classList.toggle('open')">
+                        <span data-i18n="management">Management</span>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="nav-section-items">
+                        <a href="#" class="nav-item"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="classes">Classes</span></a>
+                        <a href="#" class="nav-item"><i class="fa-solid fa-credit-card"></i> <span data-i18n="memberships">Memberships</span></a>
+                        <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i> <span data-i18n="settings">Settings</span></a>
+                    </div>
+                </div>
             </nav>
 
             <div class="sensor-status">
@@ -63,9 +75,14 @@
         <main class="main-content">
             <!-- Header -->
             <header class="top-header">
-                <div class="search-bar">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Search athletes, metrics, or AI models...">
+                <div class="header-left">
+                    <div class="action-btn menu-toggle" id="menuToggle" title="Toggle Menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </div>
+                    <div class="search-bar">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search athletes, metrics, or AI models...">
+                    </div>
                 </div>
 
                 <div class="header-actions">
