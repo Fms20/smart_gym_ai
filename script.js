@@ -440,4 +440,86 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }, 1500);
     }
+
+    // --- Login Logic ---
+    const loginForm = document.getElementById('loginForm');
+    const loginScreen = document.getElementById('login-screen');
+    const appScreen = document.getElementById('app-screen');
+    
+    if(loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('nameInput').value;
+            const password = document.getElementById('passwordInput').value;
+            
+            let data = null;
+            try {
+                // Determine base URL depending on environment
+                const baseUrl = window.location.href.includes('localhost') || window.location.href.includes('127.0.0.1') ? 'http://localhost:3000' : '';
+                
+                const response = await fetch(`${baseUrl}/api/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, password })
+                });
+                
+                data = await response.json();
+            } catch (err) {
+                console.warn('Server not available, falling back to offline mode.');
+                // Offline fallback logic
+                const fallbackUsers = [
+                    { id: 1, name: 'فيصل', password: '1234', role: 'Admin' },
+                    { id: 2, name: 'محمد', password: '1234', role: 'Coach' },
+                    { id: 3, name: 'نواف', password: '1234', role: 'Athlete' }
+                ];
+                
+                const user = fallbackUsers.find(u => u.name === name && u.password === password);
+                if (user) {
+                    data = { success: true, user: user };
+                } else {
+                    data = { success: false, error: 'كلمة المرور أو الاسم غير صحيح' };
+                }
+            }
+                
+            if(data && data.success) {
+                // Update UI based on role
+                document.querySelector('.user-name').innerText = data.user.name;
+                document.querySelector('.system-role').innerText = data.user.role;
+                
+                // Switch screens
+                loginScreen.style.display = 'none';
+                appScreen.style.display = 'flex'; 
+                
+                // Role based UI adjustments
+                const navAthletes = document.getElementById('nav-athletes');
+                const navCoaches = document.getElementById('nav-coaches');
+                const navNotifications = document.getElementById('nav-notifications');
+                const navGroupAi = document.getElementById('nav-group-ai');
+                const navGroupMgmt = document.getElementById('nav-group-management');
+                
+                // Entity Separation Logic
+                if (data.user.role === 'Athlete') {
+                    if(navAthletes) navAthletes.style.display = 'none';
+                    if(navCoaches) navCoaches.style.display = 'none';
+                    if(navGroupMgmt) navGroupMgmt.style.display = 'none';
+                    if(navNotifications) navNotifications.style.display = 'flex';
+                } else if (data.user.role === 'Coach') {
+                    if(navAthletes) navAthletes.style.display = 'flex';
+                    if(navCoaches) navCoaches.style.display = 'none'; 
+                    if(navGroupMgmt) navGroupMgmt.style.display = 'none';
+                    if(navNotifications) navNotifications.style.display = 'none';
+                } else if (data.user.role === 'Admin') {
+                    if(navAthletes) navAthletes.style.display = 'flex';
+                    if(navCoaches) navCoaches.style.display = 'flex';
+                    if(navGroupMgmt) navGroupMgmt.style.display = 'flex';
+                    if(navNotifications) navNotifications.style.display = 'none';
+                }
+                
+                // Trigger reflow of charts as they're now visible
+                setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
+            } else {
+                alert('فشل تسجيل الدخول: ' + (data ? data.error : 'خطأ غير معروف'));
+            }
+        });
+    }
 });
